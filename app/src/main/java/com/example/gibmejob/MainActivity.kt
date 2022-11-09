@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,6 +22,7 @@ import com.example.gibmejob.screens.login.LoginOptionScreen
 import com.example.gibmejob.screens.login.LoginScreen
 import com.example.gibmejob.screens.login.RegisterScreen
 import com.example.gibmejob.screens.user.UserScreen
+import com.example.gibmejob.screens.user.UserViewModel
 import com.example.gibmejob.ui.theme.GibMeJobTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,6 +44,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GibMeJobApp() {
+    val userViewModel = viewModel<UserViewModel>()
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -60,7 +63,7 @@ fun GibMeJobApp() {
             RegisterScreen(navController)
         }
         composable(Routes.UserScreen) {
-            UserScreen(navController)
+            UserScreen( userViewModel = userViewModel )
         }
     }
 }
